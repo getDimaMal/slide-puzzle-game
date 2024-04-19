@@ -1,0 +1,11 @@
+{
+  "name": "slide-puzzle-game",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/getDimaMal/slide-puzzle-game.git",
+  "author": "Malyshev <getDimaMal@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}
