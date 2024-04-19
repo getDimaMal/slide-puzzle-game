@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "stylelint-config-standard", "stylelint-config-recommended-scss"
+  ],
+  "plugins": [
+    "stylelint-scss", "stylelint-order"
+  ],
+  "rules": {
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": true,
+    "order/order": [
+      "custom-properties", "declarations"
+    ],
+    "order/properties-order": [
+      "position", "top", "right", "bottom", "left"
+    ],
+    "no-empty-source": null,
+    "block-no-empty": null
+  }
+}
