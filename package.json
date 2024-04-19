@@ -5,7 +5,11 @@
   "repository": "https://github.com/getDimaMal/slide-puzzle-game.git",
   "author": "Malyshev <getDimaMal@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "type-check": "tsc --noEmit"
+  },
   "devDependencies": {
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }
 }
