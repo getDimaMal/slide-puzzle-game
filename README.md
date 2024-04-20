@@ -21,6 +21,5 @@
 * `yarn run format`
 * `yarn run lint:scripts`
 * `yarn run lint:styles`
-* `yarn run lint`
 * `yarn run type-check`
 * `yarn run test`

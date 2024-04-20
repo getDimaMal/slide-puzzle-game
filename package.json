@@ -8,12 +8,23 @@
   "scripts": {
     "build": "webpack",
     "dev": "webpack serve",
-    "format": "prettier --write '**/*.{js,jsx,ts,tsx,html,css}'",
+    "format": "prettier --write '**/*.{js,jsx,ts,tsx,html}'",
     "lint:scripts": "eslint '**/*.{js,jsx,ts,tsx}' --fix",
     "lint:styles": "stylelint '**/*.scss' --fix",
-    "lint": "yarn format & yarn lint:scripts & yarn lint:styles",
     "type-check": "tsc --noEmit",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.html": [
+      "yarn format"
+    ],
+    "*.scss": [
+      "yarn lint:styles"
+    ],
+    "**/*.{ts,tsx}": [
+      "yarn format", "yarn lint:scripts", "yarn type-check", "yarn test"
+    ]
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
@@ -28,7 +39,9 @@
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-react": "^7.34.1",
     "html-webpack-plugin": "^5.6.0",
+    "husky": "^9.0.11",
     "jest": "^29.7.0",
+    "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "sass": "^1.75.0",
     "sass-loader": "^14.2.1",
