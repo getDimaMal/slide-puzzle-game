@@ -1,8 +1,10 @@
 # slide-puzzle-game
 
+> This game is available at this link: https://getdimamal.github.io/slide-puzzle-game/
+
 ## Setting Up
 
-### To `run` project locally
+### To `start` project locally
 
 ```bash
   yarn install
