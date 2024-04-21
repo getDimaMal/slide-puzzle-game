@@ -5,6 +5,7 @@ module.exports = {
   collectCoverage: true,
   coverageReporters: ['html'],
   coverageDirectory: './coverage',
+  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!src/**/index.{js,ts}', '!src/**/*.d.ts'],
   moduleNameMapper: {
     '\\.module\\.scss$': '<rootDir>/tests/styleMock.ts',
     '\\.scss$': '<rootDir>/tests/styleMock.ts',

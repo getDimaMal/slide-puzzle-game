@@ -1,15 +1,9 @@
+import Board from './ui/Board';
 import './styles/main.scss';
-import * as styles from './index.module.scss';
-
-export function createWelcomeElement(): HTMLElement {
-  const element = document.createElement('div');
-  element.classList.add(styles.welcome);
-  element.append('Welcome!');
-  return element;
-}
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root');
+  const board = new Board({ size: 4 }).render();
 
-  root?.append(createWelcomeElement());
+  root?.append(board);
 });

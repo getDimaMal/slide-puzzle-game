@@ -1,0 +1,13 @@
+@import "src/styles/variables";
+
+.board {
+  $board-size: calc(var(--size) * $tile-size);
+
+  width: $board-size;
+  height: $board-size;
+  border: $board-border;
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: flex-start;
+}
