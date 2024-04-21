@@ -4,15 +4,15 @@
     "module": "es6",
     "baseUrl": "./",
     "rootDir": "./",
+    "outDir": "./dist",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "noEmit": false,
     "sourceMap": true,
     "skipLibCheck": true,
     "types": ["node", "jest", "@testing-library/jest-dom"]
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["/node_modules/", "/dist/", "/coverage/"]
 }
