@@ -11,7 +11,7 @@
     "format": "prettier --write '**/*.{js,jsx,ts,tsx,html}'",
     "lint:scripts": "eslint '**/*.{js,jsx,ts,tsx}' --fix",
     "lint:styles": "stylelint '**/*.scss' --fix",
-    "type-check": "tsc --noEmit",
+    "type-check": "bash -c tsc --noEmit",
     "test": "jest",
     "prepare": "husky"
   },
@@ -22,11 +22,8 @@
     "*.scss": [
       "yarn lint:styles"
     ],
-    "**/*.{ts,tsx}": [
-      "yarn format",
-      "yarn lint:scripts",
-      "yarn type-check",
-      "yarn test"
+    "*.{ts,tsx}": [
+      "yarn format", "yarn lint:scripts", "yarn type-check", "yarn test"
     ]
   },
   "devDependencies": {

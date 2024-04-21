@@ -3,11 +3,16 @@
 .board {
   $board-size: calc(var(--size) * $tile-size);
 
+  position: relative;
+  box-sizing: content-box;
+
   width: $board-size;
   height: $board-size;
   border: $board-border;
-  display: flex;
+  border-radius: 4px;
 
+  display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: flex-start;
 }
