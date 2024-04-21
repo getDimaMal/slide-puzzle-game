@@ -1,22 +1,26 @@
 import PuzzleModel from './models/PuzzleModel';
-import Board from './ui/Board';
-import Tile from './ui/Tile';
 import './styles/main.scss';
+import PuzzleView from './views';
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root');
   if (!root) throw new Error('Root container not found');
 
   const size = 4;
-  const board = new Board({ size }).render();
   const puzzleModel = new PuzzleModel({ size });
+  const puzzleView = new PuzzleView({ size, board: puzzleModel.getBoard() });
 
-  for (const row of puzzleModel.getBoard()) {
-    for (const value of row) {
-      const tile = new Tile({ value }).render();
-      board.append(tile);
-    }
-  }
+  setInterval(() => {
+    const board = Array(size)
+      .fill(null)
+      .map(() =>
+        Array(size)
+          .fill(null)
+          .map(() => Math.floor(Math.random() * size ** 2)),
+      );
 
-  root.append(board);
+    puzzleView.update(board);
+  }, 1000);
+
+  root.append(puzzleView.render());
 });

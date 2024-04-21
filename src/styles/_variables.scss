@@ -3,8 +3,9 @@ $tile-width: 10rem;
 $tile-margin: 0.1rem;
 $tile-size: $tile-width + $tile-margin * 2;
 $tile-font-size: 5rem;
-$tile-background: #F89F9F;
+$tile-background: #79C279;
 $tile-border-radius: 4px;
 
 // Board
+$board-pudding: $tile-margin;
 $board-border: 1px solid #A19C9C;
