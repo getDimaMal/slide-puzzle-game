@@ -11,5 +11,5 @@ module.exports = {
     '\\.scss$': '<rootDir>/tests/styleMock.ts',
   },
   setupFilesAfterEnv: ['<rootDir>/tests/jest.setup.ts'],
-  testPathIgnorePatterns: ['/node_modules/', '/dist/', '/coverage/'],
+  testPathIgnorePatterns: ['node_modules', 'dist', 'coverage'],
 };

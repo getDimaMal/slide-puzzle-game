@@ -17,15 +17,9 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.html": [
-      "yarn format"
-    ],
-    "*.scss": [
-      "yarn lint:styles"
-    ],
-    "*.{ts,tsx}": [
-      "yarn format", "yarn lint:scripts", "yarn type-check", "yarn test"
-    ]
+    "*.html": ["yarn format"],
+    "*.scss": ["yarn lint:styles"],
+    "*.{ts,tsx}": ["yarn format", "yarn lint:scripts", "yarn type-check", "yarn test --coverage=false"]
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.2",
