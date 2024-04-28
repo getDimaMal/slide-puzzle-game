@@ -1,6 +1,6 @@
-import PuzzleController from './controllers/PuzzleController';
-import PuzzleModel from './models/PuzzleModel';
-import PuzzleView from './views/PuzzleView';
+import PuzzleController from '@/controllers/PuzzleController';
+import PuzzleModel from '@/models/PuzzleModel';
+import PuzzleView from '@/views/PuzzleView';
 import './styles/main.scss';
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -20,8 +20,8 @@
 
 ### Codebase Commands
 
-* `yarn run format`
-* `yarn run lint:scripts`
-* `yarn run lint:styles`
-* `yarn run type-check`
-* `yarn run test`
+- `yarn run format`
+- `yarn run lint:scripts`
+- `yarn run lint:styles`
+- `yarn run type-check`
+- `yarn run test`

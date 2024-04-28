@@ -1,0 +1,5 @@
+.next
+.husky
+coverage
+local_modules
+node_modules

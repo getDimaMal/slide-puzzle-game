@@ -1,7 +1,7 @@
 {
-  "globals": {
-    "require": "readonly"
-  },
+  "root": true,
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
+  "plugins": ["@typescript-eslint", "prettier"],
   "env": {
     "browser": true,
     "es2021": true,
@@ -9,18 +9,37 @@
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
     "ecmaVersion": 12,
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
-  "extends": [
-    "eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"
-  ],
-  "plugins": [
-    "@typescript-eslint", "prettier"
-  ],
-  "ignorePatterns": ["dist", "node_modules"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": ["error", {}, {"usePrettierrc": true}],
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-unused-vars": ["error", {"argsIgnorePattern": "^_"}],
     "@typescript-eslint/no-var-requires": "off"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.spec.js"],
+      "env": {"jest": true}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "parser": "espree",
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ],
+  "reportUnusedDisableDirectives": true,
+  "ignorePatterns": [".husky/", ".github/", "coverage/", "node_modules/", "dist/", "out/"]
 }

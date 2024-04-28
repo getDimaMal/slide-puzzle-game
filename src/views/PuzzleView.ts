@@ -1,5 +1,5 @@
-import Board from '../ui/Board';
-import Tile from '../ui/Tile';
+import Board from '@/ui/Board';
+import Tile from '@/ui/Tile';
 
 export type PuzzleViewProps = {
   size: number;

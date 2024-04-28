@@ -1,15 +1,46 @@
-module.exports = {
+import type { Config } from '@jest/types';
+
+const config: Config.InitialOptions = {
+  verbose: true,
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
-  passWithNoTests: true,
+  setupFilesAfterEnv: ['<rootDir>/tests/jest.setup.ts'],
+
+  transform: {
+    '^.+\\.ts$': ['ts-jest', { tsconfig: '<rootDir>/tests/jest.tsconfig.json' }],
+    '^.+\\.module\\.(css|scss|sass)$': 'jest-css-modules-transform',
+  },
+  moduleNameMapper: {
+    '^.(css|scss|sass)$': 'identity-obj-proxy',
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
+
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
+  testMatch: ['**/__tests__/**/*.+(ts|tsx|js|jsx)', '**/?(*.)+(spec|test).+(ts|tsx|js|jsx)'],
+
+  testPathIgnorePatterns: [
+    '/.husky/',
+    '/.github/',
+    '/node_modules/',
+    '/coverage/',
+    '/public/',
+    '/tests/',
+    '/dist/',
+    '/out/',
+  ],
+
   collectCoverage: true,
   coverageReporters: ['html'],
-  coverageDirectory: './coverage',
-  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!src/**/index.{js,ts}', '!src/**/*.d.ts'],
-  moduleNameMapper: {
-    '\\.module\\.scss$': '<rootDir>/tests/styleMock.ts',
-    '\\.scss$': '<rootDir>/tests/styleMock.ts',
+  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!src/**/*.d.ts', '!src/**/index.ts', '!src/**/__tests__/**'],
+
+  coverageThreshold: {
+    global: {
+      lines: 80,
+      branches: 80,
+      functions: 80,
+      statements: 80,
+    },
   },
-  setupFilesAfterEnv: ['<rootDir>/tests/jest.setup.ts'],
-  testPathIgnorePatterns: ['node_modules', 'dist', 'coverage'],
 };
+
+export default config;

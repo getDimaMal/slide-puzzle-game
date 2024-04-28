@@ -1,9 +1,9 @@
-import PuzzleModel from '../models/PuzzleModel';
-import PuzzleView from '../views/PuzzleView';
+import PuzzleModel from '@/models/PuzzleModel';
+import PuzzleView from '@/views/PuzzleView';
 import PuzzleController from './PuzzleController';
 
-jest.mock('../models/PuzzleModel');
-jest.mock('../views/PuzzleView');
+jest.mock('@/models/PuzzleModel');
+jest.mock('@/views/PuzzleView');
 
 describe('PuzzleController', () => {
   let model: jest.Mocked<PuzzleModel>;

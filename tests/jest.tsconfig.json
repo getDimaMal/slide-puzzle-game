@@ -1,0 +1,28 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "baseUrl": "../",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["jest", "@types/jest", "@testing-library/jest-dom"],
+    "esModuleInterop": true,
+    "noEmit": true
+  },
+  "include": [
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "../jest.setup.ts",
+    "../src/types.d.ts"
+  ],
+  "exclude": [
+    "../.husky",
+    "../.github",
+    "../node_modules",
+    "../coverage",
+    "../public",
+    "../dist",
+    "../out"
+  ]
+}

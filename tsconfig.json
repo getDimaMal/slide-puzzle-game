@@ -1,18 +1,45 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "es6",
-    "baseUrl": "./",
-    "rootDir": "./",
-    "outDir": "./dist",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "sourceMap": true,
+    "target": "ES5",
+    "module": "esnext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
     "skipLibCheck": true,
-    "types": ["node", "jest", "@testing-library/jest-dom"]
+    "esModuleInterop": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": false,
+    "incremental": false,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "outDir": "./out",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "plugins": [{"name": "next"}]
   },
-  "include": ["src/**/*", "src/typings.d.ts"],
-  "exclude": ["node_modules", "dist", "coverage"]
+  "include": [
+    ".next/types/**/*.ts",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx"
+  ],
+  "exclude": [
+    ".next",
+    ".github",
+    "node_modules",
+    "coverage",
+    "public",
+    "dist",
+    "out"
+  ]
 }

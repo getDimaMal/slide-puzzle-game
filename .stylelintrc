@@ -2,19 +2,33 @@
   "extends": [
     "stylelint-config-recommended-scss"
   ],
-  "plugins": [
-    "stylelint-scss", "stylelint-order"
-  ],
+  "plugins": ["stylelint-scss", "stylelint-order"],
+  "defaultSeverity": "error",
   "rules": {
-    "at-rule-no-unknown": null,
     "scss/at-rule-no-unknown": true,
-    "order/order": [
-      "custom-properties", "declarations"
-    ],
-    "order/properties-order": [
-      "position", "top", "right", "bottom", "left"
-    ],
-    "no-empty-source": null,
-    "block-no-empty": null
-  }
+    "order/order": ["custom-properties", "declarations"],
+    "block-no-empty": true,
+    "max-nesting-depth": 2,
+    "no-empty-source": true,
+    "at-rule-no-unknown": null,
+    "no-descending-specificity": true,
+    "declaration-block-single-line-max-declarations": 1,
+    "rule-empty-line-before": ["always", {"ignore": ["inside-block"]}],
+    "property-no-unknown": [true, {"ignoreProperties": ["composes", "extends"]}],
+    "selector-pseudo-element-no-unknown": [true, {"ignorePseudoElements": ["deep"]}],
+    "selector-pseudo-class-no-unknown": [true, {"ignorePseudoClasses": ["export", "import", "global", "local"]}],
+    "selector-class-pattern": [
+      "^[a-z0-9\\-]+(__[a-z0-9\\-]+)?(--[a-z0-9\\-]+){0,2}$",
+      {
+        "message": "Expected class name to follow BEM convention (.some-block__element--modifier)"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["**/*.scss"],
+      "rules": {"block-no-empty": true}
+    }
+  ],
+  "ignoreFiles": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"]
 }

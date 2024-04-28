@@ -1,3 +1,5 @@
+STAGED=$(git diff --name-only --cached);
+
 yarn pre-commit
 
-git add .
+git add $STAGED

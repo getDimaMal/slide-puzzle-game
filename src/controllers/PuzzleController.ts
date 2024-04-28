@@ -1,5 +1,5 @@
-import PuzzleModel from '../models/PuzzleModel';
-import PuzzleView from '../views/PuzzleView';
+import PuzzleModel from '@/models/PuzzleModel';
+import PuzzleView from '@/views/PuzzleView';
 
 class PuzzleController {
   constructor(
