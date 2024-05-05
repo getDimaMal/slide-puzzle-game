@@ -1,22 +1,17 @@
 import * as styles from './board.module.scss';
 
-interface BoardProps {
-  size: number;
-}
-
 class Board {
-  private readonly element: HTMLElement;
+  private board: HTMLElement;
 
-  constructor(private props: BoardProps) {
-    const { size } = this.props;
-
-    this.element = document.createElement('div');
-    this.element.style.setProperty('--size', size.toString());
-    this.element.classList.add(styles.board);
+  constructor(private root: HTMLElement) {
+    this.board = document.createElement('div');
+    this.root.append(this.board);
   }
 
-  render() {
-    return this.element;
+  render(size: number) {
+    this.board.style.setProperty('--size', size.toString());
+    this.board.classList.add(styles['board']);
+    return this.board;
   }
 }
 

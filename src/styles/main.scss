@@ -1,4 +1,4 @@
-@import "variables";
+@import "libs";
 
 *,
 *::after,
@@ -14,20 +14,39 @@
   user-select: none;
 }
 
-html, body {
+html, body, #root {
   width: 100%;
-  height: 100vh;
+  height: 100%;
 
-  display: flex;
-  overflow: scroll hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
 
-  font-size: 16px;
   font-family: Arial, sans-serif;
+
+  user-select: none;
+
+  position: fixed;
+}
+
+html, body {
+  @include respond-to("mobile") {
+    font-size: 8px;
+  }
+  @include respond-to("tablet") {
+    font-size: 12px;
+  }
+  @include respond-to("desktop") {
+    font-size: 16px;
+  }
 }
 
 #root {
-  flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @include respond-to("mobile") {
+    -webkit-overflow-scrolling: touch; // Smooth scrolling on touch devices
+  }
 }

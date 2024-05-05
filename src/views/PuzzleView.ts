@@ -1,37 +1,39 @@
 import Board from '@/ui/Board';
 import Tile from '@/ui/Tile';
 
-export type PuzzleViewProps = {
-  size: number;
-};
-
 class PuzzleView {
-  board: HTMLElement;
-  tiles: HTMLElement[];
+  private tiles: Tile[][] = [];
+  public onTileClick!: (row: number, col: number) => void;
 
-  constructor(private props: PuzzleViewProps) {
-    const { size } = this.props;
+  constructor(private root: HTMLElement) {}
 
-    this.board = new Board({ size }).render();
-    this.tiles = [];
-    this.update([]);
+  private initialRender(grid: number[][]) {
+    const board = new Board(this.root).render(grid.length);
+
+    grid.forEach((row, rowIndex) => {
+      this.tiles.push([]);
+      row.forEach((value, colIndex) => {
+        this.tiles[rowIndex].push(new Tile(board));
+        this.tiles[rowIndex][colIndex].render(value);
+        this.tiles[rowIndex][colIndex].onClick = () => this.onTileClick(rowIndex, colIndex);
+      });
+    });
   }
 
-  update(board: number[][]) {
-    this.tiles.forEach((tile) => tile.remove());
-    this.tiles = [];
+  slide<T extends number>(row: T, col: T, newRow: T, newCol: T) {
+    return this.tiles[row][col].slide(newRow, newCol);
+  }
 
-    for (const row of board) {
-      for (const value of row) {
-        const tile = new Tile({ value }).render();
-        this.board.append(tile);
-        this.tiles.push(tile);
-      }
+  render(grid: number[][]) {
+    if (this.tiles.length) {
+      grid.forEach((row, rowIndex) => {
+        row.forEach((value, colIndex) => {
+          this.tiles[rowIndex][colIndex].render(value);
+        });
+      });
+    } else {
+      this.initialRender(grid);
     }
-  }
-
-  render() {
-    return this.board;
   }
 }
 

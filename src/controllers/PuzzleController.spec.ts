@@ -13,38 +13,22 @@ describe('PuzzleController', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
-    model = new PuzzleModel({ size: 4 }) as jest.Mocked<PuzzleModel>;
-    view = new PuzzleView({ size: 4 }) as jest.Mocked<PuzzleView>;
-
-    view.board = document.createElement('div');
+    model = new PuzzleModel() as jest.Mocked<PuzzleModel>;
+    view = new PuzzleView(document.body) as jest.Mocked<PuzzleView>;
 
     controller = new PuzzleController(model, view);
   });
 
   it('should initialize', () => {
-    expect(model.getBoard).toHaveBeenCalled();
-    expect(view.update).toHaveBeenCalledWith(model.getBoard());
+    expect(model.getGrid).toHaveBeenCalled();
+    expect(view.render).toHaveBeenCalledWith(model.getGrid());
   });
 
-  it('should set click event listener', () => {
-    controller['update'] = jest.fn();
+  it('should moveTile', () => {
+    jest.spyOn(model, 'moveTile').mockReturnValue([1, 2]);
+    controller['moveTile'](3, 4);
 
-    const event = new MouseEvent('click');
-    view.board.dispatchEvent(event);
-
-    expect(controller['update']).toHaveBeenCalled();
-  });
-
-  it('should call update', () => {
-    const board = [[1]];
-
-    jest.clearAllMocks();
-    model.getBoard.mockReturnValue(board);
-
-    controller['update']();
-
-    expect(model.setBoard).toHaveBeenCalledWith(expect.any(Array));
-    expect(model.getBoard).toHaveBeenCalledTimes(1);
-    expect(view.update).toHaveBeenCalledWith(board);
+    expect(view.slide).toHaveBeenCalledWith(3, 4, 1, 2);
+    expect(view.render).toHaveBeenCalledWith(model.getGrid());
   });
 });

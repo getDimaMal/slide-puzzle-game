@@ -6,25 +6,14 @@ class PuzzleController {
     private model: PuzzleModel,
     private view: PuzzleView,
   ) {
-    this.view.update(this.model.getBoard());
-    this.setClickListener();
+    this.view.render(this.model.getGrid());
+    this.view.onTileClick = this.moveTile.bind(this);
   }
 
-  private setClickListener() {
-    this.view.board.addEventListener('click', () => this.update());
-  }
-
-  private update() {
-    const board = Array(4)
-      .fill(null)
-      .map(() =>
-        Array(4)
-          .fill(null)
-          .map(() => Math.floor(Math.random() * 15)),
-      );
-
-    this.model.setBoard(board);
-    this.view.update(this.model.getBoard());
+  private async moveTile(row: number, col: number) {
+    const [newRow, newCol] = this.model.moveTile(row, col);
+    await this.view.slide(row, col, newRow, newCol);
+    this.view.render(this.model.getGrid());
   }
 }
 

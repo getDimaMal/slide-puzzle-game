@@ -1,35 +1,63 @@
-import PuzzleView, { PuzzleViewProps } from './PuzzleView';
+import Board from '@/ui/Board';
+import Tile from '@/ui/Tile';
+import PuzzleView from './PuzzleView';
 
-const getProps = (props: Partial<PuzzleViewProps> = {}): PuzzleViewProps => ({
-  size: 4,
-  ...props,
+jest.mock('@/ui/Board', () => {
+  return jest.fn().mockImplementation(() => ({ render: jest.fn() }));
 });
 
-describe('PuzzleView', () => {
+jest.mock('@/ui/Tile', () => {
+  return jest.fn().mockImplementation(() => ({
+    onClick: null,
+    slide: jest.fn(),
+    render: jest.fn(),
+  }));
+});
+
+describe('PuzzleView class', () => {
+  const mockGrid = [[1, 2]];
+  let container: HTMLElement;
+
+  beforeEach(() => {
+    container = document.createElement('div');
+    document.body.appendChild(container);
+  });
+
   afterEach(() => {
-    document.body.innerHTML = '';
+    document.body.removeChild(container);
   });
 
-  it('should render', () => {
-    const puzzleView = new PuzzleView({ ...getProps() });
-    document.body.append(puzzleView.render());
+  test('initialRender properly initializes tiles', () => {
+    const puzzleView = new PuzzleView(container);
+    puzzleView.render(mockGrid);
 
-    expect(document.getElementsByClassName('board')[0]).toBeInTheDocument();
+    expect(Board).toHaveBeenCalledTimes(1);
+    expect(Tile).toHaveBeenCalledTimes(2);
   });
 
-  it('should update', () => {
-    const puzzleView = new PuzzleView({ ...getProps() });
+  test('onTileClick is triggered on tile click', () => {
+    const puzzleView = new PuzzleView(container);
+    puzzleView.render(mockGrid);
+    puzzleView.onTileClick = jest.fn();
+    puzzleView['tiles'][0][0].onClick();
 
-    document.body.append(puzzleView.render());
+    expect(puzzleView.onTileClick).toHaveBeenCalledWith(0, 0);
+  });
 
-    expect(document.getElementsByClassName('tile').length).toBe(0);
+  test('slide method triggers tile slide', () => {
+    const puzzleView = new PuzzleView(container);
+    puzzleView.render(mockGrid);
+    puzzleView.slide(0, 0, 1, 1);
 
-    puzzleView.update([[1]]);
-    expect(document.getElementsByClassName('tile').length).toBe(1);
-    expect(document.getElementsByClassName('tile')[0].textContent).toBe('1');
+    expect(puzzleView['tiles'][0][0].slide).toHaveBeenCalledWith(1, 1);
+  });
 
-    puzzleView.update([[2]]);
-    expect(document.getElementsByClassName('tile').length).toBe(1);
-    expect(document.getElementsByClassName('tile')[0].textContent).toBe('2');
+  test('render updates existing tiles', () => {
+    const puzzleView = new PuzzleView(container);
+    puzzleView.render(mockGrid);
+    puzzleView.render([[3, 4]]);
+
+    expect(puzzleView['tiles'][0][0].render).toHaveBeenCalledWith(3);
+    expect(puzzleView['tiles'][0][1].render).toHaveBeenCalledWith(4);
   });
 });

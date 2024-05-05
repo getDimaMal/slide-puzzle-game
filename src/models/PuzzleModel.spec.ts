@@ -1,33 +1,62 @@
-import PuzzleModel, { PuzzleModelProps } from './PuzzleModel';
-
-const getProps = (props: Partial<PuzzleModelProps> = {}): PuzzleModelProps => ({
-  size: 4,
-  ...props,
-});
+import PuzzleModel from './PuzzleModel';
 
 describe('PuzzleModel', () => {
-  it('should getBoard', () => {
-    const props = getProps();
-    const puzzleModel = new PuzzleModel({ ...props });
-    const board = puzzleModel.getBoard();
+  const grid = [
+    [1, 2, 3, 4],
+    [5, 6, 7, 0],
+  ];
 
-    expect(Array.isArray(board)).toBeTruthy();
-    expect(board.length).toBe(props.size);
+  it('should genGrid', () => {
+    const puzzleModel = new PuzzleModel();
+    const result = puzzleModel['genGrid'](4);
 
-    expect(Array.isArray(board[0])).toBeTruthy();
-    expect(board[0].length).toBe(props.size);
+    expect(result.length).toBe(4);
+    expect(result[0].length).toBe(4);
   });
 
-  it('should setBoard', () => {
-    const puzzleModel = new PuzzleModel({ ...getProps({ size: 3 }) });
-    const board = Array(4)
-      .fill(null)
-      .map((_, index) => Array(4).fill(index));
+  it('should shuffleGrid', () => {
+    const puzzleModel = new PuzzleModel();
+    const result = puzzleModel['shuffleGrid'](grid);
 
-    expect(puzzleModel.getBoard()).not.toEqual(board);
+    expect(result).toEqual(grid);
+  });
 
-    puzzleModel.setBoard(board);
+  it('should locateBlank', () => {
+    const puzzleModel = new PuzzleModel();
+    puzzleModel['grid'] = [[...grid[0]], [...grid[1]]];
+    puzzleModel['locateBlank']();
 
-    expect(puzzleModel.getBoard()).toEqual(board);
+    expect(puzzleModel['blankRow']).toBe(1);
+    expect(puzzleModel['blankCol']).toBe(3);
+  });
+
+  it.each<[[number, number], number[]]>([
+    [
+      [0, 3],
+      [1, 0],
+    ],
+
+    [
+      [1, 2],
+      [0, 1],
+    ],
+
+    [
+      [0, 2],
+      [0, 0],
+    ],
+  ])('should moveTile with: %s', (coord, result) => {
+    const puzzleModel = new PuzzleModel();
+    puzzleModel['grid'] = [[...grid[0]], [...grid[1]]];
+    puzzleModel['locateBlank']();
+
+    expect(puzzleModel.moveTile(...coord)).toEqual(result);
+  });
+
+  it('should getGrid', () => {
+    const puzzleModel = new PuzzleModel();
+    puzzleModel['grid'] = [[...grid[0]], [...grid[1]]];
+
+    expect(puzzleModel.getGrid()).toEqual(grid);
   });
 });

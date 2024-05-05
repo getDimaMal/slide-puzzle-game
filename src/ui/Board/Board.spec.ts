@@ -2,9 +2,9 @@ import Board from './Board';
 
 describe('Board', () => {
   it('should render component', () => {
-    const component = new Board({ size: 4 }).render();
+    const board = new Board(document.body).render(4);
 
-    expect(component.tagName.toLowerCase()).toBe('div');
-    expect(component.classList.contains('board')).toBeTruthy();
+    expect(board.tagName.toLowerCase()).toBe('div');
+    expect(board.classList.contains('board')).toBeTruthy();
   });
 });

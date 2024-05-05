@@ -26,8 +26,6 @@
     "plugins": [{"name": "next"}]
   },
   "include": [
-    ".next/types/**/*.ts",
-    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "**/*.js",

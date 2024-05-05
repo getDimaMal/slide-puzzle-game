@@ -1,0 +1,22 @@
+@import "functions";
+
+@mixin respond-to($size) {
+  @media #{responsive($size)} {
+    @content;
+  }
+}
+
+@mixin simple-slide($from, $to, $duration) {
+  @keyframes slide {
+    0% { transform: $from; }
+    100% { transform: $to; }
+
+  }
+
+  will-change: transform;
+  transform: translateZ(0);
+  animation: slide $duration ease-in forwards;
+  -webkit-animation: slide $duration ease-in forwards;
+  -moz-animation: slide $duration ease-in forwards;
+  -o-animation: slide $duration ease-in forwards;
+}
